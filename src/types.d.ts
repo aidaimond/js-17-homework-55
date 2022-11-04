@@ -3,3 +3,8 @@ interface Ingredient {
   price: number;
   image: string;
 }
+
+interface IngCount {
+  name: string;
+  count: number;
+}
