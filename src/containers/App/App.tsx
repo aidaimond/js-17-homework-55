@@ -7,6 +7,7 @@ import baconImage from '../../assets/bacon.png';
 import BurgerLeftside from "../../components/BurgerLeftside/BurgerLeftside";
 import BurgerRightside from "../../components/BurgerRightside/BurgerRightside";
 
+
 const INGREDIENTS: Ingredient[] = [
   {name: 'Meat', price: 80, image: meatImage},
   {name: 'Cheese', price: 50, image: cheeseImage},
@@ -47,6 +48,15 @@ function App() {
     }))
   };
 
+  const totalPrice = ingredients.reduce((total: number[], item) => {
+    INGREDIENTS.map(ingredient => {
+      if (item.name === ingredient.name) {
+        total.push(ingredient.price * item.count)
+      }
+    });
+    return total;
+  }, [30,]);
+
   return (
     <div className="m-3 container d-flex">
       <div className="m-3 text-center border col-6">
@@ -66,8 +76,11 @@ function App() {
             </div>
           ))}
         </div>
+        <span>
+            Total price: {totalPrice.reduce((acc, count) => acc + count)}
+          </span>
       </div>
-      <BurgerRightside/>
+      <BurgerRightside ingredients={ingredients}/>
     </div>
   );
 }
